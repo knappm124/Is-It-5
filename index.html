@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is it 5?</title>
+    <style>
+        body{
+            background-color: aliceblue;
+            width: 100%;
+            text-align: center;
+            margin:0;
+            margin-top: 100px;
+        }
+        input {
+            margin-bottom: 100px;
+            background-color: white;
+            border: solid 1px #ccc;
+            border-radius: 40px;
+            padding: 5px 10px;
+        }
+        input:hover{
+            cursor:pointer
+        }
+        input:active{
+            -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+            -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+            box-shadow: inset 0px 0px 5px #c1c1c1;
+            border: solid 1px #c1c1c1;
+        }
+        .no{
+            font-size: large;
+            color: red;
+            font-weight: bold;
+        }
+        .yes{
+            font-size: large;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Is it 5 yet?</h1>
+    <input type="button" value="Check" id="check">
+    <div id="answer"></div>
+    <div id="test"></div>
+    <script>
+        let answer = document.getElementById('answer');
+        let check = document.getElementById('check');
+        let innerHTML;
+        check.addEventListener('click', () => {
+            let time = new Date();
+            time = time.toLocaleString();
+            time = time.split(' ');
+            let index = time[1].indexOf(':');
+            let hours = parseInt(time[1].substring(0, index), 10);
+            let min = parseInt(time[1].substring(index + 1, index + 3), 10);
+            if (hours == 12) {
+                hours = 0;
+            };
+            if (min == 0) {
+                hours = hours - 1;
+                min = 60;
+            };
+            const newhours = 4-hours;
+            const newmin = 60-min;
+            if (time[2] == "PM") {
+                if (hours >= 5) {
+                    innerHTML = `<p class="yes">Yes!</p><p>It's after 5! No more work!</p>`
+                } else {
+                    innerHTML = `<p class="no">No :(</p><p> You still have ${newhours} hours and ${newmin} minutes left</p>`
+                }
+            } else {
+                newhours = newhours + 12;
+                innerHTML = `<p class="no">No :(</p><p> You still have ${newhours} hours and ${newmin} minutes left</p>`
+            }
+            answer.innerHTML = innerHTML;
+        })
+    </script>
+</body>
+
+</html>
