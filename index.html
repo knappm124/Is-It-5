@@ -74,7 +74,7 @@
             };
             const newhours = 4 - hours;
             const newmin = 60 - min;
-            if (long === "Sun" || long === "Sat") {
+            if (long[0] === "Sun" || long[0] === "Sat") {
                 innerHTML = `<p class="yes">It's the weekend! No work today!</p>`
             } else {
                 if (time[2] === "PM") {
