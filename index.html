@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Is it 5?</title>
     <style>
-        body{
+        body {
             background-color: aliceblue;
             width: 100%;
             text-align: center;
-            margin:0;
+            margin: 0;
             margin-top: 100px;
         }
+
         input {
             margin-bottom: 100px;
             background-color: white;
@@ -20,21 +21,25 @@
             border-radius: 40px;
             padding: 5px 10px;
         }
-        input:hover{
-            cursor:pointer
+
+        input:hover {
+            cursor: pointer
         }
-        input:active{
+
+        input:active {
             -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
             -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
             box-shadow: inset 0px 0px 5px #c1c1c1;
             border: solid 1px #c1c1c1;
         }
-        .no{
+
+        .no {
             font-size: large;
             color: red;
             font-weight: bold;
         }
-        .yes{
+
+        .yes {
             font-size: large;
             color: green;
             font-weight: bold;
@@ -53,6 +58,9 @@
         let innerHTML;
         check.addEventListener('click', () => {
             let time = new Date();
+            let long = time.toString();
+            long = long.split(' ');
+            let day = long[0];
             time = time.toLocaleString();
             time = time.split(' ');
             let index = time[1].indexOf(':');
@@ -65,17 +73,25 @@
                 hours = hours - 1;
                 min = 60;
             };
-            const newhours = 4-hours;
-            const newmin = 60-min;
-            if (time[2] == "PM") {
-                if (hours >= 5) {
-                    innerHTML = `<p class="yes">Yes!</p><p>It's after 5! No more work!</p>`
+            const newhours = 4 - hours;
+            const newmin = 60 - min;
+            if (long == "Sun" || long == "Sat") {
+                innerHTML = `<p class="yes">It's the weekend! No work today!</p>`
+            } else {
+                if (time[2] == "PM") {
+                    if (hours >= 5) {
+                        innerHTML = `<p class="yes">Yes!</p><p>It's after 5! No more work!</p>`
+                    } else {
+                        if (hours == 0) {
+                            innerHTML = `<p class="no">No :(</p><p> You still have ${newmin} minutes left</p>`
+                        } else {
+                            innerHTML = `<p class="no">No :(</p><p> You still have ${newhours} hours and ${newmin} minutes left</p>`
+                        }
+                    }
                 } else {
+                    newhours = newhours + 12;
                     innerHTML = `<p class="no">No :(</p><p> You still have ${newhours} hours and ${newmin} minutes left</p>`
                 }
-            } else {
-                newhours = newhours + 12;
-                innerHTML = `<p class="no">No :(</p><p> You still have ${newhours} hours and ${newmin} minutes left</p>`
             }
             answer.innerHTML = innerHTML;
         })
