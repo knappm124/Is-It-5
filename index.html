@@ -81,7 +81,7 @@
                     if (hours >= 5) {
                         innerHTML = `<p class="yes">Yes!</p><p>It's after 5! No more work!</p>`
                     } else {
-                        if (hours == 0) {
+                        if (newhours === 0) {
                             innerHTML = `<p class="no">No :(</p><p> You still have ${newmin} minutes left</p>`
                         } else {
                             innerHTML = `<p class="no">No :(</p><p> You still have ${newhours} hours and ${newmin} minutes left</p>`
