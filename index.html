@@ -51,7 +51,6 @@
     <h1>Is it 5 yet?</h1>
     <input type="button" value="Check" id="check">
     <div id="answer"></div>
-    <div id="test"></div>
     <script>
         let answer = document.getElementById('answer');
         let check = document.getElementById('check');
@@ -75,10 +74,10 @@
             };
             const newhours = 4 - hours;
             const newmin = 60 - min;
-            if (long == "Sun" || long == "Sat") {
+            if (long === "Sun" || long === "Sat") {
                 innerHTML = `<p class="yes">It's the weekend! No work today!</p>`
             } else {
-                if (time[2] == "PM") {
+                if (time[2] === "PM") {
                     if (hours >= 5) {
                         innerHTML = `<p class="yes">Yes!</p><p>It's after 5! No more work!</p>`
                     } else {
